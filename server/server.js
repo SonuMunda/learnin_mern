@@ -6,6 +6,7 @@ const dotenv = require('dotenv');
 dotenv.config({path:'./config.env'})
 
 const DB = process.env.DATABASE;
+const PORT = process.env.PORT;
 mongoose
   .connect(DB)
   .then(() => {
@@ -20,4 +21,4 @@ mongoose
     res.send("api running");
   });
 
-app.listen(3001);
+app.listen(PORT);
