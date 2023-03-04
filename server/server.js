@@ -1,14 +1,25 @@
 const express = require("express");
 const app = express();
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 
-dotenv.config({path:'./config.env'})
-require('./db/conn');
+dotenv.config({ path: "./config.env" });
+require("./db/conn");
+
+app.use(express.json());
+app.use(require("./router/auth"));
 
 const PORT = process.env.PORT;
 
-  app.get("/", (req, res) => {
-    res.send("api running");
-  });
+const Middleware = function (req, res, next) {
+  // Perform some operation
+  console.log("This is my middleware function");
+  s;
+  // Pass control to the next middleware function or to the route handler
+  next();
+};
+
+// app.get("/", (req, res) => {
+//   res.send("api running");
+// });
 
 app.listen(PORT);
