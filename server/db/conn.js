@@ -3,11 +3,14 @@ const mongoose = require("mongoose");
 const DB = process.env.DATABASE;
 
 mongoose
-  .connect(DB)
-  .then(() => {
-    console.log("database connected");
-    
+  .connect(DB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
   })
-  .catch((Error) => {
-    console.log(Error);
+  .then(() => {
+    console.log("Database connected");
+  })
+  .catch((err) => {
+    console.error("Error connecting to database:", err);
+    process.exit(1);
   });

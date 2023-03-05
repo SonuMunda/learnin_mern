@@ -13,7 +13,7 @@ const PORT = process.env.PORT;
 const Middleware = function (req, res, next) {
   // Perform some operation
   console.log("This is my middleware function");
-  s;
+
   // Pass control to the next middleware function or to the route handler
   next();
 };
@@ -22,4 +22,6 @@ const Middleware = function (req, res, next) {
 //   res.send("api running");
 // });
 
-app.listen(PORT);
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
+});
