@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 require("../db/conn");
 const User = require("../model/userSchema");
@@ -45,6 +46,7 @@ router.post("/register", (req, res) => {
 
 router.post("/register", async (req, res) => {
   try {
+    let token;
     const { name, email, phone, password, cpassword } = req.body;
 
     if (!name || !email || !phone || !password || !cpassword) {
@@ -78,6 +80,7 @@ router.post("/signin", async (req, res) => {
 
     if (userLogin) {
       const isMatch = await bcrypt.compare(password, userLogin.password);
+      const token = await userLogin.generateAuthToken();
       if (!isMatch) {
         res.status(400).json({ message: "invalid credential" });
       } else {
